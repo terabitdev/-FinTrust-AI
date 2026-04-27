@@ -1,0 +1,67 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+server/dist/
+
+# Environment
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+
+# Database
+server/prisma/dev.db
+server/prisma/dev.db-journal
+server/prisma/*.db
+*.db
+*.sqlite
+*.sqlite3
+
+# Prisma generated client
+server/node_modules/
+
+# TypeScript
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Vite cache
+.vite/
+
+# Test output
+coverage/
+test-results/
+playwright-report/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+wget-log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Temp / misc
+*.tmp
+*.temp
+.cache/
