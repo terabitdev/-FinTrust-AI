@@ -13,7 +13,7 @@ const navItems = [
   { to: '/loans', label: 'Loans', icon: '💳' },
 ]
 
-export default function Layout() {
+export default function Layout({ children }: { children?: React.ReactNode }) {
   const { user, logout } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
@@ -47,7 +47,7 @@ export default function Layout() {
       </header>
 
       <main className="mx-auto max-w-lg px-4 pb-24 pt-6">
-        <Outlet />
+        {children || <Outlet />}
       </main>
 
       {chatOpen && <ChatPanel onClose={() => setChatOpen(false)} />}

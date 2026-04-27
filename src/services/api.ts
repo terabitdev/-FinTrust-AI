@@ -1,6 +1,6 @@
 const getToken = () => localStorage.getItem('accessToken')
 
-async function request(path: string, options: RequestInit = {}) {
+async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const token = getToken()
   const res = await fetch(`/api${path}`, {
     ...options,
@@ -15,14 +15,14 @@ async function request(path: string, options: RequestInit = {}) {
     const data = await res.json().catch(() => ({}))
     throw new Error((data as { error?: string }).error || `Request failed: ${res.status}`)
   }
-  if (res.status === 204) return
-  return res.json()
+  if (res.status === 204) return undefined as unknown as T
+  return res.json() as Promise<T>
 }
 
 export const api = {
-  get: (path: string) => request(path),
-  post: (path: string, body: unknown) => request(path, { method: 'POST', body: JSON.stringify(body) }),
-  put: (path: string, body: unknown) => request(path, { method: 'PUT', body: JSON.stringify(body) }),
-  patch: (path: string, body: unknown) => request(path, { method: 'PATCH', body: JSON.stringify(body) }),
-  delete: (path: string) => request(path, { method: 'DELETE' }),
+  get: <T>(path: string) => request<T>(path),
+  post: <T>(path: string, body: unknown) => request<T>(path, { method: 'POST', body: JSON.stringify(body) }),
+  put: <T>(path: string, body: unknown) => request<T>(path, { method: 'PUT', body: JSON.stringify(body) }),
+  patch: <T>(path: string, body: unknown) => request<T>(path, { method: 'PATCH', body: JSON.stringify(body) }),
+  delete: <T>(path: string) => request<T>(path, { method: 'DELETE' }),
 }
